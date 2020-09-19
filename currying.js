@@ -1,0 +1,53 @@
+// 函数参数个数定长的函数柯里化
+// function add(a, b, c, d) {
+//   console.log(...arguments);
+//   return [...arguments].reduce((a, b) => a + b);
+// }
+
+function curring(fn) {
+  const length = fn.length; // 用来获取函数的形参个数
+
+  return function curried(...args) {
+    console.log(args, length);
+    // arguments.length 获取的是实参个数
+    if (args.length >= length) {
+      // 返回执行结果
+      return fn.apply(this, args);
+    }
+
+    return function (...args2) {
+      // 继续返回函数
+      return curried.apply(this, args.concat(args2));
+    };
+  };
+}
+
+// let addCurry = curring(add);
+
+// console.log(addCurry(1)(2, 3)(4)); // 10
+// console.log(addCurry(1)(2)(3)(4)); // 10
+// console.log(addCurry(1)(2)(3)(4)(5)); // 实参长度超过形参 报错
+
+// 函数参数个数不定长的柯里化
+function sum(...args) {
+  return args.reduce((a, b) => a + b);
+}
+
+function currying(fn) {
+  let args = [];
+  return function curried(...newArgs) {
+    // 如果有参数传入，则将参数存入args, 继续执行
+    if (newArgs.length) {
+      args = args.concat(newArgs);
+      return curried;
+    }
+
+    // 最后一步不传参数，此时已经在上一步拿到了全部参数，结束递归，执行原函数
+    return fn.apply(this, args);
+  };
+}
+
+const sumCurry = currying(sum);
+
+// 注意调用方式的变化
+console.log(sumCurry(1)(2)(3)(4)(5)());
