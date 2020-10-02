@@ -58,7 +58,7 @@ Function.prototype.mybind = function (context, ...args) {
    * fbind.prototype = self.prototype;
    */
 
-  // create相当于Object.create(), 可以通过一个空函数来进行中转, 通过new继承
+  // create相当于Object.create()实现原型式继承, 可以通过一个空函数来进行中转, 通过new进行继承
   /**
     * Object.create = function( o ) {
       function f(){}
