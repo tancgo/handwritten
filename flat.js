@@ -21,10 +21,30 @@ Array.prototype.myflat = function (depth = 1) {
     : arr.slice();
 };
 
+// 无递归版本, 使用栈
+function flatten(arr) {
+  const stack = [...arr];
+  const res = [];
+
+  while (stack.length) {
+    const cur = stack.pop();
+
+    if (Array.isArray(cur)) {
+      // 使用 push 送回内层数组中的元素，不会改动原始输入
+      stack.push(...cur);
+    } else {
+      res.push(cur);
+    }
+  }
+
+  // 反转恢复原数组的顺序
+  return res.reverse();
+}
+
 var arr = [1, [2, [3, 4]]];
 
-console.log(arr.myflat(), 'proto');
+console.log(arr.myflat(), "proto");
 
 console.log(myflat(arr));
 
-
+console.log(flatten(arr));
