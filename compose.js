@@ -9,6 +9,13 @@ function compose(...funcs) {
     return funcs[0];
   }
 
+  /**
+   * 第几轮循环      acc                                      func                返回的值
+   * 第一轮循环	     fn1	                                    fn2	                (...args) => fn1(fn2(...args))
+   * 第二轮循环	     (...args) => fn1(fn2(...args))	          fn3	                (...args) => fn1(fn2(fn3(...args)))
+   * 第三轮循环	     (...args) => fn1(fn2(fn3(...args)))	    fn4	                (...args) => fn1(fn2(fn3(fn4(...args))))
+   */
+
   // funcs.reduce((acc, func) => {
   //   return (...args) => {
   //     return acc(func(...args));
