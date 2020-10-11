@@ -11,6 +11,8 @@ var arr = [
   },
 ];
 
+var tan = [1,2, () => {}]
+
 var new_arr = JSON.parse(JSON.stringify(arr));
 
 console.log(new_arr);
@@ -38,3 +40,4 @@ function deepClone(obj) {
 }
 
 console.log(deepClone(arr));
+console.log(deepClone(tan));
