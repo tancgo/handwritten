@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1" />
+    <title>debounce</title>
+    <style>
+      #container {
+        width: 100%;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        color: #fff;
+        background-color: #444;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <span id="container">1</span>
+    <button id="button">点击加 1</button>
+    <script>
+      // ------------------------------------传统做法----------------------------
+      // document.getElementById("button").addEventListener("click", function () {
+      //   var container = document.getElementById("container");
+      //   container.innerHTML = Number(container.innerHTML) + 1;
+      // });
+
+      // ------------------------------------proxy----------------------------
+      var obj = {
+        value: 1,
+      };
+
+      var proxy = new Proxy(obj, {
+        get: function (obj, prop) {
+          return obj[prop];
+        },
+        set: function (obj, prop, value) {
+          obj[prop] = value;
+          document.getElementById('container').innerHTML = value;
+        },
+      });
+
+      document.getElementById("button").addEventListener("click", function () {
+        proxy.value += 1;
+      });
+    </script>
+  </body>
+</html>
