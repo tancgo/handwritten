@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1" />
-    <title>debounce</title>
+    <title>proxy</title>
     <style>
       #container {
         width: 100%;
@@ -18,8 +18,9 @@
   </head>
 
   <body>
-    <span id="container">1</span>
-    <button id="button">点击加 1</button>
+    <p>请输入:</p>
+    <input type="text" id="input" />
+    <p id="span"></p>
     <script>
       // ------------------------------------传统做法----------------------------
       // document.getElementById("button").addEventListener("click", function () {
@@ -28,23 +29,30 @@
       // });
 
       // ------------------------------------proxy----------------------------
-      var obj = {
-        value: 1,
-      };
+      var obj = {};
 
       var proxy = new Proxy(obj, {
-        get: function (obj, prop) {
-          return obj[prop];
+        get: function (target, key, receiver) {
+          // return target[key]
+          return Reflect.get(target, key, receiver);
         },
-        set: function (obj, prop, value) {
-          obj[prop] = value;
-          document.getElementById('container').innerHTML = value;
+        set: function (target, key, value, receiver) {
+          console.log(target, key, value, receiver);
+          document.getElementById("input").value = value;
+          document.getElementById("span").innerHTML = value;
+
+          // 相当于target[key] =  value
+          return Reflect.set(target, key, value, receiver);
         },
       });
 
-      document.getElementById("button").addEventListener("click", function () {
-        proxy.value += 1;
+      document.getElementById("input").addEventListener("keyup", function (e) {
+        proxy.text = e.target.value;
       });
+
+      // setInterval(() => {
+      //   proxy.text = Math.random();
+      // }, 1000);
     </script>
   </body>
 </html>
