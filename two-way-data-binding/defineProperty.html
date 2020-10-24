@@ -33,15 +33,15 @@
     
       };
 
-      // 储存 obj.value 的值, 否则 set 中直接 obj.value = newValue 就会陷入无限的循环中
-      var value = 1;
+      // 储存 obj.value 的值, 否则 set 中直接 obj.value = newValue 就会陷入无限的循环中(或者深拷贝一下obj， get里面return newObj.)
+      var text = 1;
 
       Object.defineProperty(obj, "text", {
         get: function () {
-          return value;
+          return text;
         },
         set: function (newValue) {
-          value = newValue;
+          text = newValue;
           document.getElementById("input").value = newValue;
           document.getElementById("span").innerHTML = newValue;
         },
