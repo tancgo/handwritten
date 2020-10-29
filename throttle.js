@@ -3,11 +3,10 @@ function throttle(func, wait) {
   let previous = 0;
 
   return function (...args) {
-    const that = this;
     const now = new Date();
 
     if (now - previous > wait) {
-      func.apply(that, args);
+      func.apply(this, args);
       previous = now;
     }
   };
@@ -18,10 +17,15 @@ function throttle1(func, wait) {
   let timer = null;
 
   return function (...args) {
+    // 箭头函数的话可以不使用此步骤
     const that = this;
 
     if (!timer) {
-      timer = setTimeout(() => {
+      // timer = setTimeout(() => {
+      //   timer = null;
+      //   func.apply(this, args);
+      // }, wait);
+      timer = setTimeout(function () {
         timer = null;
         func.apply(that, args);
       }, wait);
@@ -36,9 +40,9 @@ let count = 1;
 const container = document.getElementById("container");
 
 function getUserAction(e) {
-  console.log(this);
-  console.log(e);
+  console.log(this, "this");
+  console.log(e, "args");
   container.innerHTML = count++;
 }
 
-container.onmousemove = throttle1(getUserAction, 3000);
+container.onmousemove = throttle(getUserAction, 3000);
