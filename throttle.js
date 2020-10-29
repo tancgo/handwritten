@@ -36,6 +36,8 @@ function throttle1(func, wait) {
 // 第一种事件会立刻执行，第二种事件会在 n 秒后第一次执行
 // 第一种事件停止触发后没有办法再执行事件，第二种事件停止触发后依然会再执行一次事件
 
+// 比如一个场景： 拖动图形的时候同时在页面上显示坐标，停止触发的时候需要再执行一次事件， 这时候用定时器的方式更合理
+
 let count = 1;
 const container = document.getElementById("container");
 
