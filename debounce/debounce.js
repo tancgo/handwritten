@@ -38,7 +38,7 @@ function debounce1(func, wait) {
     clearTimeout(timer);
 
     timer = setTimeout(() => {
-      func.apply(that, arg); // 此时的func如果不经过apply， this指向window
+      func.apply(this, arg); // 此时的func(普通函数)如果不经过apply， this指向window，箭头函数可以直接写this
     }, wait);
   };
 }
