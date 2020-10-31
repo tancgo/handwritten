@@ -55,3 +55,17 @@ const sumCurry = currying(sum);
 console.log(sumCurry(1)(2)(3)(4)(5)());
 console.log(sumCurry(1)());
 console.log(sumCurry(1)(2)());
+
+// 重写toString的方式
+function add(...args) {
+  const curied = function (...params) {
+    return add.apply(null, args.concat(params));
+  };
+
+  curied.toString = () => args.reduce((a, b) => a + b);
+
+  return curied;
+}
+
+// 返回的数字是函数类型
+console.log(add(1)(2, 3)(4) | 0);
