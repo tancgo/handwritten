@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyPromise</title>
+    <script src="test.js"></script>
+  </head>
+  <body></body>
+  <script>
+    new MyPromise((resolve, reject) => {
+      // resolve("接受");
+      // reject("拒绝");
+      setTimeout(() => {
+        resolve("接受");
+      }, 1000);
+    })
+      .then()
+      .then(
+        (value) => {
+          // throw new Error("fail error");
+          console.log(value, "resolve");
+
+          return new MyPromise((resolve) => {
+            resolve("resolve promise");
+          });
+        },
+        (reason) => {
+          // console.log(bbb);
+          console.log(reason, "reason");
+
+          return "reject then";
+        }
+      )
+      .then(
+        (value) => {
+          console.log(value, "resolve1");
+        },
+        (reason) => {
+          // console.log(bbb);
+          console.log(reason, "reason2");
+        }
+      );
+  </script>
+</html>
