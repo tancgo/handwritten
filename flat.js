@@ -41,6 +41,16 @@ function flatten(arr) {
   return res.reverse();
 }
 
+// 利用concat会自动拉平一层的特性
+function flatten1(arr, depth = 1) {
+  while (arr.some((item) => Array.isArray(item)) && depth > 0) {
+    arr = [].concat(...arr);
+    depth--;
+  }
+
+  return arr
+}
+
 var arr = [1, [2, [3, 4]]];
 
 console.log(arr.myflat(), "proto");
@@ -48,3 +58,5 @@ console.log(arr.myflat(), "proto");
 console.log(myflat(arr));
 
 console.log(flatten(arr));
+
+console.log(flatten1(arr,2))
