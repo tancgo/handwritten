@@ -48,7 +48,32 @@ function flatten1(arr, depth = 1) {
     depth--;
   }
 
-  return arr
+  return arr;
+}
+
+function* generator(arr) {
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      yield* generator(item);
+    } else {
+      yield item;
+    }
+  }
+}
+
+// 利用generator函数的特性
+function flatten2(arr, depth = 1) {
+  function* generator(arr, depth) {
+    for (const item of arr) {
+      if (Array.isArray(item) && depth > 0) {
+        yield* generator(item, depth - 1);
+      } else {
+        yield item;
+      }
+    }
+  }
+
+  return [...generator(arr, depth)];
 }
 
 var arr = [1, [2, [3, 4]]];
@@ -59,4 +84,4 @@ console.log(myflat(arr));
 
 console.log(flatten(arr));
 
-console.log(flatten1(arr,2))
+console.log(flatten1(arr, 2));
