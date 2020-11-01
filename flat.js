@@ -51,16 +51,6 @@ function flatten1(arr, depth = 1) {
   return arr;
 }
 
-function* generator(arr) {
-  for (const item of arr) {
-    if (Array.isArray(item)) {
-      yield* generator(item);
-    } else {
-      yield item;
-    }
-  }
-}
-
 // 利用generator函数的特性
 function flatten2(arr, depth = 1) {
   function* generator(arr, depth) {
