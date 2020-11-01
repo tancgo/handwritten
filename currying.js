@@ -69,3 +69,16 @@ function add(...args) {
 
 // 返回的数字是函数类型
 console.log(add(1)(2, 3)(4) | 0);
+
+// 重写valueOf的方式
+function sum(...args) {
+  const curried = function (...params) {
+    return sum(...args, ...params);
+  };
+
+  curried.valueOf = () => args.reduce((a, b) => a + b);
+
+  return curried
+}
+
+console.log(sum(1)(2, 3)(4).valueOf())
