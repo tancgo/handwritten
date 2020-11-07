@@ -1,6 +1,6 @@
 const root = require("./bt");
 
-// 中序遍历左根右  预期结果 [4,5,2,6,7,3,1]
+// 后序遍历左右根  预期结果 [4,5,2,6,7,3,1]
 
 // 解法1：递归
 var postorderTraversal0 = function (root) {
