@@ -1,6 +1,6 @@
 class EventEmitter {
   constructor() {
-    // 事件对象，存放订阅的名字和事件，例如：{click: {handle1, handle2}}
+    // 事件对象，存放订阅的名字和事件，例如：{click: [handle1, handle2]}
     this.events = {};
   }
 
