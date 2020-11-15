@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid上中下三栏布局</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: 200px auto 200px;
+        grid-template-rows: 100px calc(100vh - 200px) 100px;
+        grid-template-areas: "header header header" "left middle right" "footer footer footer";
+      }
+
+      .container .header {
+        grid-area: header;
+        background-color:black;
+      }
+
+      .container .footer {
+        grid-area: footer;
+        background-color:black;
+      }
+
+      .container .left {
+        grid-area: left;
+        background-color: tomato;
+      }
+
+      .container .middle {
+        grid-area: middle;
+        background-color: teal;
+      }
+
+      .container .right {
+        grid-area: right;
+        background-color: yellow;
+      }
+
+      /* .left {
+        background-color: tomato;
+      }
+
+      .middle {
+        background-color: teal;
+      }
+
+      .right {
+        background-color: yellow;
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">box1</div>
+      <div class="left">box1</div>
+      <div class="middle">box2</div>
+      <div class="right">box3</div>
+      <div class="footer">box1</div>
+    </div>
+  </body>
+</html>

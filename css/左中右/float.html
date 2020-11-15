@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>float</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      .container {
+        height: 200px;
+      }
+
+      .left {
+        float: left;
+        background: black;
+        width: 200px;
+      }
+
+      .right {
+        float: right;
+        background: black;
+        width: 200px;
+      }
+
+      .main {
+        background: cadetblue;
+        margin: 0 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 中间元素必须放在最后渲染 否则会被挤压至下一行 -->
+    <!-- http://blog.dangosky.com/2019/03/07/%E6%9C%AA%E7%9F%A5%E5%AE%BD%E9%AB%98%E5%85%83%E7%B4%A0%E7%9A%84%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E5%B8%83%E5%B1%80/#toc-heading-18 -->
+    <div class="container clearfix">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="main"></div>
+    </div>
+  </body>
+</html>
