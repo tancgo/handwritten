@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #wrap p:nth-child(3) {
+      color: red;
+    }
+  </style>
+
+</head>
+
+<body>
+  <span id="wrap">
+    <p>元素</p>
+    <p>元素</p>
+    <p>元素</p>
+  </span>
+</body>
+<script>
+  const dom = document.getElementById('wrap')
+
+  dom.addEventListener('click', (e) => {
+    const arr = Array.from(document.getElementsByTagName('p'))
+
+    console.log(arr, e.target)
+
+    return arr.indexOf(e.target)
+  })
+</script>
+
+</html>
