@@ -14,3 +14,6 @@ Array.prototype.myReduce = function (fn, initialValue) {
   // 返回累加值
   return acc
 }
+
+console.log([1, 2, 3].myReduce((a, b) => a + b))
+console.log([1, 2, 3].myReduce((a, b) => a + b, 10))
